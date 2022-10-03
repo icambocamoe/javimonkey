@@ -1,0 +1,32 @@
+(assert (monkey near door) (monkey farfrom window))
+
+(defrule r1 (monkey near door) (monkey farfrom window) 
+=> (printout  t "monkey goes to the box" crlf) 
+(assert (monkey near box)) (retract 1) (retract 2))
+
+(run)
+
+(assert (monkey hands-free) )
+
+(defrule r2 (monkey near box) (monkey hands-free) 
+=> (printout t "monkey took the box" crlf) 
+(retract 4) 
+(assert (monkey hands-busy)) (assert (monkey grabbed-box)))
+
+(defrule r3 (monkey near box) (monkey hands-busy) (monkey grabbed-box) 
+=> (printout t "monkey goes below the banana" crlf) 
+(assert (monkey below-banana)))
+
+(defrule r4 (monkey below-banana) (monkey hands-busy) (monkey grabbed-box) 
+=> (printout t "monkey drop box below banana" crlf) 
+(assert (monkey hands-free) (box below banana)) 
+(retract 3 5 6))
+
+(defrule r4 (monkey below-banana) (monkey hands-free) (box below banana) 
+=> (printout t "monkey on top box below banana" crlf)
+(assert (monkey on top box)))
+
+(defrule r5 (monkey below-banana) (monkey hands-free) (box below banana) (monkey on top box) 
+=> (printout t "monkey grabbed banana" crlf))
+
+(run)
