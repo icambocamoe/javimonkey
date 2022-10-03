@@ -22,11 +22,11 @@
 (assert (monkey hands-free) (box below banana)) 
 (retract 3 5 6))
 
-(defrule r4 (monkey below-banana) (monkey hands-free) (box below banana) 
+(defrule r5 (monkey below-banana) (monkey hands-free) (box below banana) 
 => (printout t "monkey on top box below banana" crlf)
 (assert (monkey on top box)))
 
-(defrule r5 (monkey below-banana) (monkey hands-free) (box below banana) (monkey on top box) 
+(defrule r6 (monkey below-banana) (monkey hands-free) (box below banana) (monkey on top box) 
 => (printout t "monkey grabbed banana" crlf))
 
 (run)
